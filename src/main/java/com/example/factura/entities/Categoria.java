@@ -1,11 +1,17 @@
 package com.example.factura.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "categoria")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Categoria {
@@ -18,4 +24,7 @@ public class Categoria {
 
     private boolean activa;
 
+    @OneToMany(mappedBy = "categoria")
+    @JsonIgnoreProperties("categoria")
+    private List<Producto> productos;
 }
